@@ -23,6 +23,21 @@ fn content() -> impl Element {
         .item(username_panel())
 }
 
+fn textarea() -> impl Element {
+    TextArea::new()
+        .s(Padding::all(10))
+        // .s(RoundedCorners::new().left(5))
+        .s(Width::new(400))
+        .s(Font::new().size(17))
+        // .s(Background::new().color(BLUE_0))
+        .focus(true)
+        .on_change(super::set_new_message_text)
+        .label_hidden("New message text")
+        .placeholder(Placeholder::new("Message"))
+        .on_key_down_event(|event| event.if_key(Key::Enter, super::send_message))
+        .text_signal(super::new_message_text().signal_cloned())
+}
+
 // ------ received_messages ------
 
 fn received_messages() -> impl Element {
@@ -73,7 +88,7 @@ fn emoji(name: &str) -> impl Element {
 // ------ new_message_panel ------
 
 fn new_message_panel() -> impl Element {
-    Row::new().item(new_message_input()).item(send_button())
+    Row::new().item(textarea()).item(send_button())
 }
 
 fn new_message_input() -> impl Element {
