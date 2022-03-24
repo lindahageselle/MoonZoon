@@ -27,7 +27,7 @@ fn textarea() -> impl Element {
     TextArea::new()
         .s(Padding::all(10))
         // .s(RoundedCorners::new().left(5))
-        .s(Width::new(400))
+        .s(Width::fill())
         .s(Font::new().size(17))
         // .s(Background::new().color(BLUE_0))
         .focus(true)
